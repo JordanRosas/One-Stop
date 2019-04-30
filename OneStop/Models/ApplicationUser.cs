@@ -13,6 +13,7 @@ namespace OneStop.Models
         {
 
         }
+        public int UserId { get; set; }
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

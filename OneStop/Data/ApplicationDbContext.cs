@@ -22,8 +22,10 @@ namespace OneStop.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             ApplicationUser user = new ApplicationUser
             {
+                UserId = 1,
                 FirstName = "Jordan",
                 LastName = "Rosas",
                 Email = "admin@admin.com",
@@ -37,7 +39,7 @@ namespace OneStop.Data
             //Returns a hased representation of the entered passwrod for the user
             user.PasswordHash = passwordHash.HashPassword(user, "Samantha21!");
             builder.Entity<ApplicationUser>().HasData(user);
-
+            //Status Table  
             builder.Entity<Status>().HasData(
                 new Status()
                 {
@@ -63,6 +65,27 @@ namespace OneStop.Data
                 {
                     StatusId = 5,
                     StatusName = "Hired"
+                }
+            );
+            //Seeding the company Table
+            builder.Entity<Company>().HasData(
+                new Company()
+                {
+                    Id = 1,
+                    CreatorId = user.UserId,
+                    CompanyName = "Google",
+                    CompanyWebsite = "www.google.com",
+                    Address = "1234 Google rd",
+                    CityState = "San francisco, CA"
+                },
+                new Company()
+                {
+                    Id = 2,
+                    CreatorId = user.UserId,
+                    CompanyName = "Facebook",
+                    CompanyWebsite = "www.Facebook.com",
+                    Address = "1234 Facebook rd",
+                    CityState = "San francisco, CA"
                 }
             );
         }
