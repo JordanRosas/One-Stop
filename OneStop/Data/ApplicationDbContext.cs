@@ -39,6 +39,7 @@ namespace OneStop.Data
             //Returns a hased representation of the entered passwrod for the user
             user.PasswordHash = passwordHash.HashPassword(user, "Samantha21!");
             builder.Entity<ApplicationUser>().HasData(user);
+
             //Status Table  
             builder.Entity<Status>().HasData(
                 new Status()
@@ -86,6 +87,27 @@ namespace OneStop.Data
                     CompanyWebsite = "www.Facebook.com",
                     Address = "1234 Facebook rd",
                     CityState = "San francisco, CA"
+                }
+            );
+
+            builder.Entity<JobTicket>().HasData(
+                new JobTicket()
+                {
+                    JobTicketId = 1,
+                    UserId = user.UserId,
+                    CompanyId = 1,
+                    Position = "Software Developer",
+                    DateCreated = DateTime.Now.ToString("MM/DD/YYYY"),
+                    StatusId = 1
+                },
+                new JobTicket()
+                {
+                    JobTicketId = 2,
+                    UserId = user.UserId,
+                    CompanyId = 2,
+                    Position = "Software Developer",
+                    DateCreated = DateTime.Now.ToString("MM/DD/YYYY"),
+                    StatusId = 2
                 }
             );
         }
