@@ -7,7 +7,7 @@ namespace OneStop.Models
 {
     public class Status
     {
-        public int Id { get; set; }
+        public int StatusId { get; set; }
         public string StatusName { get; set; }
     }
 }

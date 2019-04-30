@@ -37,6 +37,34 @@ namespace OneStop.Data
             //Returns a hased representation of the entered passwrod for the user
             user.PasswordHash = passwordHash.HashPassword(user, "Samantha21!");
             builder.Entity<ApplicationUser>().HasData(user);
+
+            builder.Entity<Status>().HasData(
+                new Status()
+                {
+                    StatusId = 1,
+                    StatusName = "Interested"
+                },
+                new Status()
+                {
+                    StatusId = 2,
+                    StatusName = "Applied"
+                },
+                new Status()
+                {
+                    StatusId = 3,
+                    StatusName = "Interviewed"
+                },
+                new Status()
+                {
+                    StatusId = 4,
+                    StatusName = "Rejected"
+                },
+                new Status()
+                {
+                    StatusId = 5,
+                    StatusName = "Hired"
+                }
+            );
         }
     }
 }
