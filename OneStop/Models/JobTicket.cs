@@ -13,5 +13,6 @@ namespace OneStop.Models
         public string Position { get; set; }
         public string DateCreated { get; set; }
         public int StatusId { get; set; }
+
     }
 }

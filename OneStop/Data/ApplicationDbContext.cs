@@ -8,12 +8,10 @@ using OneStop.Models;
 
 namespace OneStop.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){}
+
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<JobTicket> JobTickets { get; set; }
@@ -25,9 +23,10 @@ namespace OneStop.Data
 
             ApplicationUser user = new ApplicationUser
             {
-                UserId = 1,
-                FirstName = "Jordan",
-                LastName = "Rosas",
+                FirstName = "admin",
+                LastName = "admin",
+                UserName = "admin@admin.com",
+                NormalizedUserName = "ADMIN@ADMIN.COM",
                 Email = "admin@admin.com",
                 NormalizedEmail = "ADMIN@ADMIN.COM",
                 EmailConfirmed = true,

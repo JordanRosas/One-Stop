@@ -22,14 +22,6 @@ namespace OneStop.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Name")]
-        public string FullName
-        {
-            get
-            {
-                return $"{FirstName} {LastName}";
-            }
-        }
         public string  Email { get; set; }
 
         public string Password { get; set; }
