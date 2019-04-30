@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +28,13 @@ namespace OneStop.Controllers
             _context = context;
             _userManager = userManager;
         }
+
+        [Authorize]
         public async Task<IActionResult> Index()
         {
-            var Companies = _context.Companies;
-              
-            return View(await Companies.ToListAsync());
+            var user = await GetCurrentUserAsync();
+            var userId = user.Id;             
+            return View(await _context.Companies.Where(c => c.Creator.Id == userId).ToListAsync());
         }
 
         public IActionResult Privacy()

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OneStop.Models.Company>
+﻿    @model IEnumerable<OneStop.Models.Company>
 
 @{
     ViewData["Title"] = "Index";
@@ -34,7 +34,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatorId)
+                @Html.DisplayFor(modelItem => item.Creator.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CompanyName)
