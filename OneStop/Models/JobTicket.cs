@@ -8,7 +8,8 @@ namespace OneStop.Models
     public class JobTicket  
     {
         public int JobTicketId { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
+
         public int CompanyId { get; set; }
         public string Position { get; set; }
         public string DateCreated { get; set; }

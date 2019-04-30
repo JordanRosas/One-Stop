@@ -72,7 +72,7 @@ namespace OneStop.Data
                 new Company()
                 {
                     Id = 1,
-                    CreatorId = user.UserId,
+                    CreatorId = user.Id,
                     CompanyName = "Google",
                     CompanyWebsite = "www.google.com",
                     Address = "1234 Google rd",
@@ -81,7 +81,7 @@ namespace OneStop.Data
                 new Company()
                 {
                     Id = 2,
-                    CreatorId = user.UserId,
+                    CreatorId = user.Id,
                     CompanyName = "Facebook",
                     CompanyWebsite = "www.Facebook.com",
                     Address = "1234 Facebook rd",
@@ -93,7 +93,7 @@ namespace OneStop.Data
                 new JobTicket()
                 {
                     JobTicketId = 1,
-                    UserId = user.UserId,
+                    UserId = user.Id,
                     CompanyId = 1,
                     Position = "Software Developer",
                     DateCreated = DateTime.Now.ToString("MM/DD/YYYY"),
@@ -102,7 +102,7 @@ namespace OneStop.Data
                 new JobTicket()
                 {
                     JobTicketId = 2,
-                    UserId = user.UserId,
+                    UserId = user.Id,
                     CompanyId = 2,
                     Position = "Software Developer",
                     DateCreated = DateTime.Now.ToString("MM/DD/YYYY"),
