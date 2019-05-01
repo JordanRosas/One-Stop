@@ -1,59 +1,74 @@
-﻿    @model IEnumerable<OneStop.Models.Company>
+﻿@model IEnumerable<OneStop.Models.JobTicket>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class=" container">
+    <div class=" row">
+        <div class="col-sm">
+            <h2>Interested</h2>
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+            @foreach (var item in Model)
+            {
+                @if (item.StatusId == 1)
+                {
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatorId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyWebsite)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CityState)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Creator.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyWebsite)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CityState)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    <div>
+                        <p>@item.CompanyId</p>
+                        <p>@item.Position</p>
+                        <a asp-action="Edit" asp-route-id="@item.JobTicketId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.JobTicketId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.JobTicketId">Delete</a>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-sm">
+            <h2>Applied</h2>
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+            @foreach (var thing in Model)
+            {
+                @if (thing.StatusId == 2)
+                {
+
+                        <div >
+                            <p>@thing.CompanyId</p>
+                            <p>@thing.Position</p>
+
+                            <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                        </div>
+                }
+            }
+        </div>
+        <div class="col-sm">
+            <h2>Interviewed</h2>
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+        </div>
+        <div class="col-sm">
+            <h2>Rejected</h2>
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+        </div>
+        <div class="col-sm">
+            <h2>Hired</h2>
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+

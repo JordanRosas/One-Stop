@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OneStop.Data;
 using OneStop.Models;
+using OneStop.Models.ViewModels;
 
 namespace OneStop.Controllers
 {
@@ -33,8 +34,9 @@ namespace OneStop.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await GetCurrentUserAsync();
-            var userId = user.Id;             
-            return View(await _context.Companies.Where(c => c.Creator.Id == userId).ToListAsync());
+            var userId = user.Id;
+            return View(await _context.JobTickets
+                .Where(c => c.UserId == userId).ToListAsync());
         }
 
         public IActionResult Privacy()
