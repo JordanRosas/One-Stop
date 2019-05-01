@@ -9,11 +9,11 @@ namespace OneStop.Models
     {
         public int JobTicketId { get; set; }
         public string UserId { get; set; }
-
         public int CompanyId { get; set; }
         public string Position { get; set; }
         public string DateCreated { get; set; }
         public int StatusId { get; set; }
-
+        public Company Company { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

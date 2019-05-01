@@ -17,7 +17,7 @@
                 {
 
                     <div>
-                        <p>@item.CompanyId</p>
+                        <p>@item.Company.CompanyName</p>
                         <p>@item.Position</p>
                         <a asp-action="Edit" asp-route-id="@item.JobTicketId">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.JobTicketId">Details</a> |
@@ -36,14 +36,14 @@
                 @if (thing.StatusId == 2)
                 {
 
-                        <div >
-                            <p>@thing.CompanyId</p>
-                            <p>@thing.Position</p>
+                    <div>
+                        <p>@thing.Company.CompanyName</p>
+                        <p>@thing.Position</p>
 
-                            <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
-                        </div>
+                        <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                    </div>
                 }
             }
         </div>

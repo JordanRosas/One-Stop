@@ -192,9 +192,9 @@ namespace OneStop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64",
+                            Id = "43e60070-8174-4bc9-a2c1-a3c903b7c70c",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "94fa47c0-cead-41e1-b658-996f4898b773",
+                            ConcurrencyStamp = "298e63b2-8bfc-4093-8177-be2877643039",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "admin",
@@ -202,9 +202,9 @@ namespace OneStop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMgAE/zEDuZLTFvXnIuZ+Bzt3ySflK5Q1aw1XUzim7LL2aaao+dLp9LIbhEbK/7zpA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECXPGpK+KM+E+gD6S2b+G0NYeguWRMPD6P52Elh0MuqNTD9gk52ApXsvhDTSfr6ZOA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6661262e-836d-4cc8-8d1f-52f0b646f63d",
+                            SecurityStamp = "e4f79524-629d-492c-aa89-3bef6129592f",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -240,7 +240,7 @@ namespace OneStop.Migrations
                             CityState = "San francisco, CA",
                             CompanyName = "Google",
                             CompanyWebsite = "www.google.com",
-                            CreatorId = "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64"
+                            CreatorId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
                         },
                         new
                         {
@@ -249,7 +249,7 @@ namespace OneStop.Migrations
                             CityState = "San francisco, CA",
                             CompanyName = "Facebook",
                             CompanyWebsite = "www.Facebook.com",
-                            CreatorId = "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64"
+                            CreatorId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
                         });
                 });
 
@@ -258,8 +258,6 @@ namespace OneStop.Migrations
                     b.Property<int>("JobTicketId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId");
 
                     b.Property<int>("CompanyId");
 
@@ -273,7 +271,9 @@ namespace OneStop.Migrations
 
                     b.HasKey("JobTicketId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("JobTickets");
 
@@ -282,19 +282,19 @@ namespace OneStop.Migrations
                         {
                             JobTicketId = 1,
                             CompanyId = 1,
-                            DateCreated = "04/DD/YYYY",
+                            DateCreated = "05/DD/YYYY",
                             Position = "Software Developer",
                             StatusId = 1,
-                            UserId = "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64"
+                            UserId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
                         },
                         new
                         {
                             JobTicketId = 2,
                             CompanyId = 2,
-                            DateCreated = "04/DD/YYYY",
+                            DateCreated = "05/DD/YYYY",
                             Position = "Software Developer",
                             StatusId = 2,
-                            UserId = "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64"
+                            UserId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
                         });
                 });
 
@@ -396,9 +396,14 @@ namespace OneStop.Migrations
 
             modelBuilder.Entity("OneStop.Models.JobTicket", b =>
                 {
-                    b.HasOne("OneStop.Models.ApplicationUser")
+                    b.HasOne("OneStop.Models.Company", "Company")
+                        .WithMany("JobTicketList")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OneStop.Models.ApplicationUser", "User")
                         .WithMany("Tickets")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("OneStop.Models.Status", b =>

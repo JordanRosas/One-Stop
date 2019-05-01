@@ -35,8 +35,12 @@ namespace OneStop.Controllers
         {
             var user = await GetCurrentUserAsync();
             var userId = user.Id;
-            return View(await _context.JobTickets
-                .Where(c => c.UserId == userId).ToListAsync());
+            var applicationContext = await _context.JobTickets
+                .Include(j => j.Company)
+                .Include(j => j.User)
+                .Where(j => j.UserId == userId)
+                .ToListAsync();
+            return View(applicationContext);
         }
 
         public IActionResult Privacy()

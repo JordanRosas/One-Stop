@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OneStop.Migrations
 {
-    public partial class OneStop : Migration
+    public partial class OneStopDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -179,30 +179,6 @@ namespace OneStop.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobTickets",
-                columns: table => new
-                {
-                    JobTicketId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: true),
-                    CompanyId = table.Column<int>(nullable: false),
-                    Position = table.Column<string>(nullable: true),
-                    DateCreated = table.Column<string>(nullable: true),
-                    StatusId = table.Column<int>(nullable: false),
-                    ApplicationUserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobTickets", x => x.JobTicketId);
-                    table.ForeignKey(
-                        name: "FK_JobTickets_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Statuses",
                 columns: table => new
                 {
@@ -222,19 +198,39 @@ namespace OneStop.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "JobTickets",
+                columns: table => new
+                {
+                    JobTicketId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
+                    CompanyId = table.Column<int>(nullable: false),
+                    Position = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<string>(nullable: true),
+                    StatusId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobTickets", x => x.JobTicketId);
+                    table.ForeignKey(
+                        name: "FK_JobTickets_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_JobTickets_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64", 0, "94fa47c0-cead-41e1-b658-996f4898b773", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEMgAE/zEDuZLTFvXnIuZ+Bzt3ySflK5Q1aw1XUzim7LL2aaao+dLp9LIbhEbK/7zpA==", null, false, "6661262e-836d-4cc8-8d1f-52f0b646f63d", false, "admin@admin.com" });
-
-            migrationBuilder.InsertData(
-                table: "JobTickets",
-                columns: new[] { "JobTicketId", "ApplicationUserId", "CompanyId", "DateCreated", "Position", "StatusId", "UserId" },
-                values: new object[,]
-                {
-                    { 1, null, 1, "04/DD/YYYY", "Software Developer", 1, "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" },
-                    { 2, null, 2, "04/DD/YYYY", "Software Developer", 2, "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" }
-                });
+                values: new object[] { "43e60070-8174-4bc9-a2c1-a3c903b7c70c", 0, "298e63b2-8bfc-4093-8177-be2877643039", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAECXPGpK+KM+E+gD6S2b+G0NYeguWRMPD6P52Elh0MuqNTD9gk52ApXsvhDTSfr6ZOA==", null, false, "e4f79524-629d-492c-aa89-3bef6129592f", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
@@ -251,12 +247,22 @@ namespace OneStop.Migrations
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "Address", "CityState", "CompanyName", "CompanyWebsite", "CreatorId" },
-                values: new object[] { 1, "1234 Google rd", "San francisco, CA", "Google", "www.google.com", "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" });
+                values: new object[] { 1, "1234 Google rd", "San francisco, CA", "Google", "www.google.com", "43e60070-8174-4bc9-a2c1-a3c903b7c70c" });
 
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "Address", "CityState", "CompanyName", "CompanyWebsite", "CreatorId" },
-                values: new object[] { 2, "1234 Facebook rd", "San francisco, CA", "Facebook", "www.Facebook.com", "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" });
+                values: new object[] { 2, "1234 Facebook rd", "San francisco, CA", "Facebook", "www.Facebook.com", "43e60070-8174-4bc9-a2c1-a3c903b7c70c" });
+
+            migrationBuilder.InsertData(
+                table: "JobTickets",
+                columns: new[] { "JobTicketId", "CompanyId", "DateCreated", "Position", "StatusId", "UserId" },
+                values: new object[] { 1, 1, "05/DD/YYYY", "Software Developer", 1, "43e60070-8174-4bc9-a2c1-a3c903b7c70c" });
+
+            migrationBuilder.InsertData(
+                table: "JobTickets",
+                columns: new[] { "JobTicketId", "CompanyId", "DateCreated", "Position", "StatusId", "UserId" },
+                values: new object[] { 2, 2, "05/DD/YYYY", "Software Developer", 2, "43e60070-8174-4bc9-a2c1-a3c903b7c70c" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -303,9 +309,14 @@ namespace OneStop.Migrations
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobTickets_ApplicationUserId",
+                name: "IX_JobTickets_CompanyId",
                 table: "JobTickets",
-                column: "ApplicationUserId");
+                column: "CompanyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobTickets_UserId",
+                table: "JobTickets",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Statuses_ApplicationUserId",
@@ -331,9 +342,6 @@ namespace OneStop.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Companies");
-
-            migrationBuilder.DropTable(
                 name: "JobTickets");
 
             migrationBuilder.DropTable(
@@ -341,6 +349,9 @@ namespace OneStop.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
