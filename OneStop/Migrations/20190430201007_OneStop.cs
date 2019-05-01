@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OneStop.Data.Migrations
+namespace OneStop.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class OneStop : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,9 @@ namespace OneStop.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,6 +155,109 @@ namespace OneStop.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Companies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CreatorId = table.Column<string>(nullable: true),
+                    CompanyName = table.Column<string>(nullable: true),
+                    CompanyWebsite = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    CityState = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Companies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Companies_AspNetUsers_CreatorId",
+                        column: x => x.CreatorId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobTickets",
+                columns: table => new
+                {
+                    JobTicketId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
+                    CompanyId = table.Column<int>(nullable: false),
+                    Position = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<string>(nullable: true),
+                    StatusId = table.Column<int>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobTickets", x => x.JobTicketId);
+                    table.ForeignKey(
+                        name: "FK_JobTickets_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Statuses",
+                columns: table => new
+                {
+                    StatusId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    StatusName = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Statuses", x => x.StatusId);
+                    table.ForeignKey(
+                        name: "FK_Statuses_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64", 0, "94fa47c0-cead-41e1-b658-996f4898b773", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEMgAE/zEDuZLTFvXnIuZ+Bzt3ySflK5Q1aw1XUzim7LL2aaao+dLp9LIbhEbK/7zpA==", null, false, "6661262e-836d-4cc8-8d1f-52f0b646f63d", false, "admin@admin.com" });
+
+            migrationBuilder.InsertData(
+                table: "JobTickets",
+                columns: new[] { "JobTicketId", "ApplicationUserId", "CompanyId", "DateCreated", "Position", "StatusId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, null, 1, "04/DD/YYYY", "Software Developer", 1, "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" },
+                    { 2, null, 2, "04/DD/YYYY", "Software Developer", 2, "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Statuses",
+                columns: new[] { "StatusId", "ApplicationUserId", "StatusName" },
+                values: new object[,]
+                {
+                    { 1, null, "Interested" },
+                    { 2, null, "Applied" },
+                    { 3, null, "Interviewed" },
+                    { 4, null, "Rejected" },
+                    { 5, null, "Hired" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Companies",
+                columns: new[] { "Id", "Address", "CityState", "CompanyName", "CompanyWebsite", "CreatorId" },
+                values: new object[] { 1, "1234 Google rd", "San francisco, CA", "Google", "www.google.com", "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" });
+
+            migrationBuilder.InsertData(
+                table: "Companies",
+                columns: new[] { "Id", "Address", "CityState", "CompanyName", "CompanyWebsite", "CreatorId" },
+                values: new object[] { 2, "1234 Facebook rd", "San francisco, CA", "Facebook", "www.Facebook.com", "9a7c4bcd-3c93-411f-a2c6-4ed4bd30be64" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -191,6 +296,21 @@ namespace OneStop.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Companies_CreatorId",
+                table: "Companies",
+                column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobTickets_ApplicationUserId",
+                table: "JobTickets",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Statuses_ApplicationUserId",
+                table: "Statuses",
+                column: "ApplicationUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,6 +329,15 @@ namespace OneStop.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Companies");
+
+            migrationBuilder.DropTable(
+                name: "JobTickets");
+
+            migrationBuilder.DropTable(
+                name: "Statuses");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
