@@ -10,6 +10,7 @@
         margin:0;
         padding:0;
         background-image:none;
+        font-family:Quicksand;
     }
 </style>
 
@@ -35,17 +36,10 @@
                             <a asp-action="Delete" asp-route-id="@item.JobTicketId">Delete</a>
                         </div>
                     </div>
-                        @*<div>
-                            <p>@item.Company.CompanyName</p>
-                            <p>@item.Position</p>
-                            <a asp-action="Edit" asp-route-id="@item.JobTicketId">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.JobTicketId">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.JobTicketId">Delete</a>
-                        </div>*@
                  }
              }
         </div>
-        <div class="col-sm">
+        <div class="col">
             <h2>Applied</h2>
             <p>
                 <a asp-action="Create">Create New</a>
@@ -65,19 +59,10 @@
                             <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
                         </div>
                     </div>
-
-                    @*<div>
-                    <p>@thing.Company.CompanyName</p>
-                    <p>@thing.Position</p>
-
-                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
-                </div>*@
                 }
             }
         </div>
-        <div class="col-sm">
+        <div class="col">
             <h2>Interviewed</h2>
             <p>
                 <a asp-action="Create">Create New</a>
@@ -97,19 +82,10 @@
                             <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
                         </div>
                     </div>
-
-                    @*<div>
-                    <p>@thing.Company.CompanyName</p>
-                    <p>@thing.Position</p>
-
-                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
-                </div>*@
                 }
             }
         </div>
-        <div class="col-sm">
+        <div class="col">
             <h2>Rejected</h2>
             <p>
                 <a asp-action="Create">Create New</a>
@@ -129,19 +105,10 @@
                             <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
                         </div>
                     </div>
-
-                    @*<div>
-                    <p>@thing.Company.CompanyName</p>
-                    <p>@thing.Position</p>
-
-                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
-                </div>*@
                 }
             }
         </div>
-        <div class="col-sm">
+        <div class="col">
             <h2>Hired</h2>
             <p>
                 <a asp-action="Create">Create New</a>
@@ -161,16 +128,7 @@
                             <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
                         </div>
                     </div>
-
-                    @*<div>
-                    <p>@thing.Company.CompanyName</p>
-                    <p>@thing.Position</p>
-
-                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
-                </div>*@
-                }
+                 }
             }
         </div>
     </div>    
