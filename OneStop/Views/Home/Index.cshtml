@@ -24,16 +24,26 @@
             {
                 @if (item.StatusId == 1)
                 {
-
-                    <div>
-                        <p>@item.Company.CompanyName</p>
-                        <p>@item.Position</p>
-                        <a asp-action="Edit" asp-route-id="@item.JobTicketId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.JobTicketId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.JobTicketId">Delete</a>
+                    <div class="card text-center">
+                        <div class="card-header">
+                            @item.Company.CompanyName
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Position</h5>
+                            <a asp-action="Edit" asp-route-id="@item.JobTicketId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.JobTicketId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.JobTicketId">Delete</a>
+                        </div>
                     </div>
-                }
-            }
+                        @*<div>
+                            <p>@item.Company.CompanyName</p>
+                            <p>@item.Position</p>
+                            <a asp-action="Edit" asp-route-id="@item.JobTicketId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.JobTicketId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.JobTicketId">Delete</a>
+                        </div>*@
+                 }
+             }
         </div>
         <div class="col-sm">
             <h2>Applied</h2>
@@ -44,15 +54,26 @@
             {
                 @if (thing.StatusId == 2)
                 {
-
-                    <div>
-                        <p>@thing.Company.CompanyName</p>
-                        <p>@thing.Position</p>
-
-                        <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                    <div class="card text-center">
+                        <div class="card-header">
+                            @thing.Company.CompanyName
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@thing.Position</h5>
+                            <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                        </div>
                     </div>
+
+                    @*<div>
+                    <p>@thing.Company.CompanyName</p>
+                    <p>@thing.Position</p>
+
+                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                </div>*@
                 }
             }
         </div>
@@ -61,20 +82,98 @@
             <p>
                 <a asp-action="Create">Create New</a>
             </p>
+            @foreach (var thing in Model)
+            {
+                @if (thing.StatusId == 3)
+                {
+                    <div class="card text-center">
+                        <div class="card-header">
+                            @thing.Company.CompanyName
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@thing.Position</h5>
+                            <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                        </div>
+                    </div>
+
+                    @*<div>
+                    <p>@thing.Company.CompanyName</p>
+                    <p>@thing.Position</p>
+
+                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                </div>*@
+                }
+            }
         </div>
         <div class="col-sm">
             <h2>Rejected</h2>
             <p>
                 <a asp-action="Create">Create New</a>
             </p>
+            @foreach (var thing in Model)
+            {
+                @if (thing.StatusId == 4)
+                {
+                    <div class="card text-center">
+                        <div class="card-header">
+                            @thing.Company.CompanyName
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@thing.Position</h5>
+                            <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                        </div>
+                    </div>
+
+                    @*<div>
+                    <p>@thing.Company.CompanyName</p>
+                    <p>@thing.Position</p>
+
+                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                </div>*@
+                }
+            }
         </div>
         <div class="col-sm">
             <h2>Hired</h2>
             <p>
                 <a asp-action="Create">Create New</a>
             </p>
+            @foreach (var thing in Model)
+            {
+                @if (thing.StatusId == 5)
+                {
+                    <div class="card text-center">
+                        <div class="card-header">
+                            @thing.Company.CompanyName
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@thing.Position</h5>
+                            <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                        </div>
+                    </div>
+
+                    @*<div>
+                    <p>@thing.Company.CompanyName</p>
+                    <p>@thing.Position</p>
+
+                    <a asp-action="Edit" asp-route-id="@thing.JobTicketId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@thing.JobTicketId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@thing.JobTicketId">Delete</a>
+                </div>*@
+                }
+            }
         </div>
-    </div>
+    </div>    
 </div>
 
 
