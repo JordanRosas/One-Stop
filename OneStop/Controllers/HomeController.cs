@@ -47,7 +47,7 @@ namespace OneStop.Controllers
         // GET: JobTickets/Create
         public IActionResult Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id");
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "CompanyName");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
@@ -57,19 +57,28 @@ namespace OneStop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("JobTicketId,UserId,CompanyId,Position,DateCreated,StatusId")] JobTicket jobTicket)
+        public async Task<IActionResult> Create([Bind("JobTicketId,UserId,CompanyId,Position,DateCreated,StatusId")] JobTicket jobTicket, Company company)
         {
+            ModelState.Remove("jobTicket.User");
+            ModelState.Remove("jobTicket.UserId");
+
+
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            jobTicket.User = user;
+            jobTicket.UserId = user.Id;
+
             if (ModelState.IsValid)
             {
                 _context.Add(jobTicket);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobTicket.CompanyId);
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "CompanyName", jobTicket.CompanyId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
             return View(jobTicket);
         }
-
+            
 
         public IActionResult Privacy()
         {

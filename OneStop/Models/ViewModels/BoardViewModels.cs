@@ -10,6 +10,5 @@ namespace OneStop.Models.ViewModels
         public Company Company { get; set; }
         public JobTicket Tickets { get; set; }
         public Status Statuses { get; set; }
-    
     }
 }
