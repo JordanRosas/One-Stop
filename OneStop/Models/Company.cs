@@ -14,5 +14,7 @@ namespace OneStop.Models
         public string CompanyWebsite { get; set; }
         public string Address { get; set; }
         public string CityState { get; set; }
+
+        public virtual ICollection<JobTicket> JobTicketList { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
 
 a.navbar-brand {
   white-space: normal;
@@ -42,8 +43,8 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 .footer {
   position: absolute;
@@ -53,4 +54,82 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
+}
+/**==========================================================================
+    MY CSS
+    ===================================================================
+    /* Styling for the log in and register page */
+/* Desktop */
+.welcome{
+    text-align:center;
+    font-family:Quicksand;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: -webkit-linear-gradient(-59.5deg, #3C3B45 50%, #A3A1A9 50%);
+    background-position: center;
+    background-size: cover;
+}
+.formContainer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15%;
+    background-color: #FAF9F8;
+    box-shadow: 2px 2px 4px gray;
+    padding-top: 20px;
+    margin-left: 200px;
+    margin-right: 200px;
+    border-radius: 21px;
+}
+.emailInput, 
+.passwordInput{ 
+    display: block;
+    background: none;
+    padding: 0.175rem 0.175rem 0.0875rem;
+    font-size: 1.4rem;
+    border-width: 0;
+    border-color: transparent;
+    line-height: 1.9;
+    width: 100%;
+    color: #ccc;
+    transition: all 0.43s ease;
+    box-shadow: none;
+    border-bottom:2px solid gray;
+    font-family:Quicksand;
+}
+#account {
+    justify-content:center;
+    width:200%;
+    margin-left:-100px;
+}
+.logInButton {
+    margin: 0 auto;
+    width: 49%;
+    background-color: #A3A1A9;
+    border: 0;
+    padding: 10px 0 10px 0;
+    font-family: Quicksand;
+    font-size: 20px;
+}
+.regButton {
+    padding: 10px 0 10px 0;
+    width: 49.5%;
+    background-color: #3C3B45;
+    border: 0;
+    font-family: Quicksand;
+    font-size:20px;
+}
+    .regButton > a {
+        text-decoration: none;
+        color: white;
+    }
+.headTitle {
+    color: #3C3B45;
+}
+.Forgot > a {
+    text-decoration:none;
+    color: #3C3B45;
 }

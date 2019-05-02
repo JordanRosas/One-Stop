@@ -1,0 +1,56 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "One Stop";
+}
+<div class="backgroundContainer center-homePage">
+    <h1 class="headTitle">@ViewData["Title"]</h1>
+    <div id="LogInContainer">
+        <div class="row formContainer">
+            <div class="col-md-4">
+                <section>
+                    <form id="account" method="post">
+                        <h4 class="welcome">Welcome To One Stop!</h4>
+                        <hr /> </br>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+
+                            <input asp-for="Input.Email" class="form-control emailInput" placeholder="Email" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div> </br>
+                        <div class="form-group">
+
+                            <input asp-for="Input.Password" class="form-control passwordInput" placeholder="Password" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary logInButton">Log in</button>
+                            <button class="btn btn-primary regButton"><a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a></button>
+
+                        </div>
+                        <div class="form-group">
+                            <p class="Forgot">
+                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
