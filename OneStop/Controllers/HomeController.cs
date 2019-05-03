@@ -80,10 +80,45 @@ namespace OneStop.Controllers
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
             return View(jobTicket);
         }
-    /*=======================================================================================================
-    * ======================================    POST A NEW COMPANY    ======================================
-    =======================================================================================================*/
+        /*=======================================================================================================
+        * ======================================    POST A NEW COMPANY    ======================================
+        =======================================================================================================*/
+        // GET: Companies/Create
+        public IActionResult CreateCompany()
+        {
+            ViewData["CreatorId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+            return View();
+        }
 
+        // POST: Companies/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCompany([Bind("Id,CreatorId,CompanyName,CompanyWebsite,Address,CityState")] Company company)
+        {
+            ModelState.Remove("company.Creator");
+            ModelState.Remove("company.CreatorId");
+
+
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            company.Creator = user;
+            company.CreatorId = user.Id;
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(company);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CreatorId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", company.CreatorId);
+            return View();
+        }
+
+        /*==================================================================================================================
+         * Privacy Stuff
+         ================================================================================================================*/
 
         public IActionResult Privacy()
         {
