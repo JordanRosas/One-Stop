@@ -71,7 +71,7 @@ namespace OneStop.Controllers
                 return NotFound();
             }
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobTicket.CompanyId);
-            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusId", jobTicket.StatusId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusName", jobTicket.StatusId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
             return View(jobTicket);
         }
