@@ -43,7 +43,9 @@ namespace OneStop.Controllers
                 .ToListAsync();
             return View(applicationContext);
         }
-
+        /*=======================================================================================================
+         * ======================================    POST A JOB TICKET    ======================================
+         =======================================================================================================*/
         // GET: JobTickets/Create
         public IActionResult Create()
         {
@@ -78,7 +80,86 @@ namespace OneStop.Controllers
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
             return View(jobTicket);
         }
-            
+        /*=======================================================================================================
+        * ======================================    Delete a job ticket    ======================================
+        =======================================================================================================*/
+        // GET: JobTickets/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var jobTicket = await _context.JobTickets
+                .Include(j => j.Company)
+                .Include(j => j.User)
+                .FirstOrDefaultAsync(m => m.JobTicketId == id);
+            if (jobTicket == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobTicket);
+        }
+
+        // POST: JobTickets/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var jobTicket = await _context.JobTickets.FindAsync(id);
+            _context.JobTickets.Remove(jobTicket);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool JobTicketExists(int id)
+        {
+            return _context.JobTickets.Any(e => e.JobTicketId == id);
+        }
+
+
+
+        /*=======================================================================================================
+        * ======================================    POST A NEW COMPANY    ======================================
+        =======================================================================================================*/
+        // GET: Companies/Create
+        public IActionResult CreateCompany()
+        {
+            ViewData["CreatorId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+            return View();
+        }
+
+        // POST: Companies/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCompany([Bind("Id,CreatorId,CompanyName,CompanyWebsite,Address,CityState")] Company company)
+        {
+            ModelState.Remove("company.Creator");
+            ModelState.Remove("company.CreatorId");
+
+
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            company.Creator = user;
+            company.CreatorId = user.Id;
+
+            if (ModelState.IsValid)
+            {
+                _context.Add(company);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CreatorId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", company.CreatorId);
+            return View();
+        }
+
+        /*==================================================================================================================
+         * Privacy Stuff
+         ================================================================================================================*/
 
         public IActionResult Privacy()
         {

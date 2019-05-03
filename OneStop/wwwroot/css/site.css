@@ -133,3 +133,12 @@ body {
     text-decoration:none;
     color: #3C3B45;
 }
+.navStyles {
+    background-color: #3C3B45 !important;
+}
+.navbar-brand{
+    color:white !important;
+}
+.nav-link{
+    color:white !important;
+}
