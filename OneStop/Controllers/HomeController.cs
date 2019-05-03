@@ -81,6 +81,47 @@ namespace OneStop.Controllers
             return View(jobTicket);
         }
         /*=======================================================================================================
+        * ======================================    Delete a job ticket    ======================================
+        =======================================================================================================*/
+        // GET: JobTickets/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var jobTicket = await _context.JobTickets
+                .Include(j => j.Company)
+                .Include(j => j.User)
+                .FirstOrDefaultAsync(m => m.JobTicketId == id);
+            if (jobTicket == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobTicket);
+        }
+
+        // POST: JobTickets/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var jobTicket = await _context.JobTickets.FindAsync(id);
+            _context.JobTickets.Remove(jobTicket);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool JobTicketExists(int id)
+        {
+            return _context.JobTickets.Any(e => e.JobTicketId == id);
+        }
+
+
+
+        /*=======================================================================================================
         * ======================================    POST A NEW COMPANY    ======================================
         =======================================================================================================*/
         // GET: Companies/Create
