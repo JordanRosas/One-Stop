@@ -51,6 +51,7 @@ namespace OneStop.Controllers
         {
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "CompanyName");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusName");
             return View();
         }
 
@@ -78,6 +79,7 @@ namespace OneStop.Controllers
             }
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "CompanyName", jobTicket.CompanyId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusId", jobTicket.StatusId);
             return View(jobTicket);
         }
         /*=======================================================================================================
@@ -94,6 +96,7 @@ namespace OneStop.Controllers
             var jobTicket = await _context.JobTickets
                 .Include(j => j.Company)
                 .Include(j => j.User)
+                .Include(j => j.Status)
                 .FirstOrDefaultAsync(m => m.JobTicketId == id);
             if (jobTicket == null)
             {
@@ -155,6 +158,28 @@ namespace OneStop.Controllers
             }
             ViewData["CreatorId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", company.CreatorId);
             return View();
+        }
+        // GET: JobTickets/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var jobTicket = await _context.JobTickets
+                .Include(j => j.Company)
+                .Include(j => j.Status)
+                .Include(j => j.User)
+                .FirstOrDefaultAsync(m => m.JobTicketId == id);
+
+            if (jobTicket == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobTicket);
         }
 
         /*==================================================================================================================

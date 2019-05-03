@@ -192,9 +192,9 @@ namespace OneStop.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "43e60070-8174-4bc9-a2c1-a3c903b7c70c",
+                            Id = "ac2abbad-9af7-40da-bb27-4f3c4455c8bf",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "298e63b2-8bfc-4093-8177-be2877643039",
+                            ConcurrencyStamp = "292a0c83-7ff3-4d9b-94ed-df86b4d0e337",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "admin",
@@ -202,9 +202,9 @@ namespace OneStop.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECXPGpK+KM+E+gD6S2b+G0NYeguWRMPD6P52Elh0MuqNTD9gk52ApXsvhDTSfr6ZOA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEBWkNnVAdw5aY2x4yQb4D5jgugOt2U4Gz2An4OAAflJOzrQrPcnpHq18kvMvQNqmzw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e4f79524-629d-492c-aa89-3bef6129592f",
+                            SecurityStamp = "b054e82f-f9f4-45a6-b235-cfded1d936cb",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -240,7 +240,7 @@ namespace OneStop.Migrations
                             CityState = "San francisco, CA",
                             CompanyName = "Google",
                             CompanyWebsite = "www.google.com",
-                            CreatorId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
+                            CreatorId = "ac2abbad-9af7-40da-bb27-4f3c4455c8bf"
                         },
                         new
                         {
@@ -249,7 +249,7 @@ namespace OneStop.Migrations
                             CityState = "San francisco, CA",
                             CompanyName = "Facebook",
                             CompanyWebsite = "www.Facebook.com",
-                            CreatorId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
+                            CreatorId = "ac2abbad-9af7-40da-bb27-4f3c4455c8bf"
                         });
                 });
 
@@ -273,6 +273,8 @@ namespace OneStop.Migrations
 
                     b.HasIndex("CompanyId");
 
+                    b.HasIndex("StatusId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("JobTickets");
@@ -285,7 +287,7 @@ namespace OneStop.Migrations
                             DateCreated = "05/DD/YYYY",
                             Position = "Software Developer",
                             StatusId = 1,
-                            UserId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
+                            UserId = "ac2abbad-9af7-40da-bb27-4f3c4455c8bf"
                         },
                         new
                         {
@@ -294,7 +296,7 @@ namespace OneStop.Migrations
                             DateCreated = "05/DD/YYYY",
                             Position = "Software Developer",
                             StatusId = 2,
-                            UserId = "43e60070-8174-4bc9-a2c1-a3c903b7c70c"
+                            UserId = "ac2abbad-9af7-40da-bb27-4f3c4455c8bf"
                         });
                 });
 
@@ -399,6 +401,11 @@ namespace OneStop.Migrations
                     b.HasOne("OneStop.Models.Company", "Company")
                         .WithMany("JobTicketList")
                         .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OneStop.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("OneStop.Models.ApplicationUser", "User")

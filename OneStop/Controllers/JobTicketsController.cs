@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using OneStop.Data;
 using OneStop.Models;
+using OneStop.Models.ViewModels;
 
 namespace OneStop.Controllers
 {
@@ -22,34 +23,17 @@ namespace OneStop.Controllers
         // GET: JobTickets
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.JobTickets.Include(j => j.Company).Include(j => j.User);
+            var applicationDbContext = _context.JobTickets.Include(j => j.Company).Include(j => j.Status).Include(j => j.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: JobTickets/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var jobTicket = await _context.JobTickets
-                .Include(j => j.Company)
-                .Include(j => j.User)
-                .FirstOrDefaultAsync(m => m.JobTicketId == id);
-            if (jobTicket == null)
-            {
-                return NotFound();
-            }
-
-            return View(jobTicket);
-        }
 
         // GET: JobTickets/Create
         public IActionResult Create()
         {
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id");
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusId");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
             return View();
         }
@@ -68,6 +52,7 @@ namespace OneStop.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobTicket.CompanyId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusId", jobTicket.StatusId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
             return View(jobTicket);
         }
@@ -86,6 +71,7 @@ namespace OneStop.Controllers
                 return NotFound();
             }
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobTicket.CompanyId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusId", jobTicket.StatusId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
             return View(jobTicket);
         }
@@ -123,6 +109,7 @@ namespace OneStop.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobTicket.CompanyId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusId", jobTicket.StatusId);
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
             return View(jobTicket);
         }
@@ -137,6 +124,7 @@ namespace OneStop.Controllers
 
             var jobTicket = await _context.JobTickets
                 .Include(j => j.Company)
+                .Include(j => j.Status)
                 .Include(j => j.User)
                 .FirstOrDefaultAsync(m => m.JobTicketId == id);
             if (jobTicket == null)

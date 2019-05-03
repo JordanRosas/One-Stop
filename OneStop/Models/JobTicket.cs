@@ -13,6 +13,7 @@ namespace OneStop.Models
         public string Position { get; set; }
         public string DateCreated { get; set; }
         public int StatusId { get; set; }
+        public Status Status { get; set; }
         public Company Company { get; set; }
         public ApplicationUser User { get; set; }
     }
