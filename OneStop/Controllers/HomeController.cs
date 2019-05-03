@@ -182,6 +182,72 @@ namespace OneStop.Controllers
             return View(jobTicket);
         }
 
+
+        // GET: JobTickets/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var jobTicket = await _context.JobTickets.FindAsync(id);
+            if (jobTicket == null)
+            {
+                return NotFound();
+            }
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "CompanyName", jobTicket.CompanyId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusName", jobTicket.StatusId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
+            return View(jobTicket);
+        }
+
+        // POST: JobTickets/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("JobTicketId,UserId,CompanyId,Position,DateCreated,StatusId")] JobTicket jobTicket)
+        {
+            if (id != jobTicket.JobTicketId)
+            {
+                return NotFound();
+            }
+            ModelState.Remove("jobTicket.User");
+            ModelState.Remove("jobTicket.UserId");
+
+
+            ApplicationUser user = await GetCurrentUserAsync();
+
+            jobTicket.User = user;
+            jobTicket.UserId = user.Id;
+
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(jobTicket);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!JobTicketExists(jobTicket.JobTicketId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CompanyId"] = new SelectList(_context.Companies, "Id", "Id", jobTicket.CompanyId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "StatusId", "StatusId", jobTicket.StatusId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", jobTicket.UserId);
+            return View(jobTicket);
+        }
         /*==================================================================================================================
          * Privacy Stuff
          ================================================================================================================*/
