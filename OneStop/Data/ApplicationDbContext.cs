@@ -96,7 +96,7 @@ namespace OneStop.Data
                     UserId = user.Id,
                     CompanyId = 1,
                     Position = "Software Developer",
-                    DateCreated = DateTime.Now.ToString("MM/DD/YYYY"),
+                    DateCreated = new DateTime(2019, 4, 28),
                     StatusId = 1
                 },
                 new JobTicket()
@@ -105,7 +105,7 @@ namespace OneStop.Data
                     UserId = user.Id,
                     CompanyId = 2,
                     Position = "Software Developer",
-                    DateCreated = DateTime.Now.ToString("MM/DD/YYYY"),
+                    DateCreated = new DateTime(2019, 1, 12),
                     StatusId = 2
                 }
             );

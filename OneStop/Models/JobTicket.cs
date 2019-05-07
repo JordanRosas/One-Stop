@@ -13,7 +13,7 @@ namespace OneStop.Models
         public int CompanyId { get; set; }
         public string Position { get; set; }
         [Display(Name = "Todays Date")]
-        public string DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }
         public int StatusId { get; set; }
         public Status Status { get; set; }
         public Company Company { get; set; }
