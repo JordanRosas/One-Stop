@@ -24,6 +24,7 @@ namespace OneStop.Models
 
         public int StatusId { get; set; }
         public Status Status { get; set; }
+
         public Company Company { get; set; }
         public ApplicationUser User { get; set; }
     }
