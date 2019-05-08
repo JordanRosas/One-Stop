@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OneStop.Migrations
 {
-    public partial class OneStop : Migration
+    public partial class OneStopDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -207,7 +207,7 @@ namespace OneStop.Migrations
                     UserId = table.Column<string>(nullable: true),
                     CompanyId = table.Column<int>(nullable: false),
                     Position = table.Column<string>(nullable: true),
-                    DateCreated = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
                     StatusId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -236,7 +236,7 @@ namespace OneStop.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "ac2abbad-9af7-40da-bb27-4f3c4455c8bf", 0, "292a0c83-7ff3-4d9b-94ed-df86b4d0e337", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEBWkNnVAdw5aY2x4yQb4D5jgugOt2U4Gz2An4OAAflJOzrQrPcnpHq18kvMvQNqmzw==", null, false, "b054e82f-f9f4-45a6-b235-cfded1d936cb", false, "admin@admin.com" });
+                values: new object[] { "83ee733d-538a-4223-8140-6ac3c6d6620c", 0, "a712e434-cf53-4b9c-ba83-859243336034", "admin@admin.com", true, "admin", "admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAEAACcQAAAAEHr8OAf6hUKdfgUeHXT4MJrDeFuMQCHk/SfRQgQZaS+vM64jaBZ9ycJuVbm9pNuhHg==", null, false, "a5940fa5-7fff-49c2-bf07-f8e2cefd98be", false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "Statuses",
@@ -253,22 +253,22 @@ namespace OneStop.Migrations
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "Address", "CityState", "CompanyName", "CompanyWebsite", "CreatorId" },
-                values: new object[] { 1, "1234 Google rd", "San francisco, CA", "Google", "www.google.com", "ac2abbad-9af7-40da-bb27-4f3c4455c8bf" });
+                values: new object[] { 1, "1234 Google rd", "San francisco, CA", "Google", "www.google.com", "83ee733d-538a-4223-8140-6ac3c6d6620c" });
 
             migrationBuilder.InsertData(
                 table: "Companies",
                 columns: new[] { "Id", "Address", "CityState", "CompanyName", "CompanyWebsite", "CreatorId" },
-                values: new object[] { 2, "1234 Facebook rd", "San francisco, CA", "Facebook", "www.Facebook.com", "ac2abbad-9af7-40da-bb27-4f3c4455c8bf" });
+                values: new object[] { 2, "1234 Facebook rd", "San francisco, CA", "Facebook", "www.Facebook.com", "83ee733d-538a-4223-8140-6ac3c6d6620c" });
 
             migrationBuilder.InsertData(
                 table: "JobTickets",
                 columns: new[] { "JobTicketId", "CompanyId", "DateCreated", "Position", "StatusId", "UserId" },
-                values: new object[] { 1, 1, "05/DD/YYYY", "Software Developer", 1, "ac2abbad-9af7-40da-bb27-4f3c4455c8bf" });
+                values: new object[] { 1, 1, new DateTime(2019, 4, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Software Developer", 1, "83ee733d-538a-4223-8140-6ac3c6d6620c" });
 
             migrationBuilder.InsertData(
                 table: "JobTickets",
                 columns: new[] { "JobTicketId", "CompanyId", "DateCreated", "Position", "StatusId", "UserId" },
-                values: new object[] { 2, 2, "05/DD/YYYY", "Software Developer", 2, "ac2abbad-9af7-40da-bb27-4f3c4455c8bf" });
+                values: new object[] { 2, 2, new DateTime(2019, 1, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "Software Developer", 2, "83ee733d-538a-4223-8140-6ac3c6d6620c" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
